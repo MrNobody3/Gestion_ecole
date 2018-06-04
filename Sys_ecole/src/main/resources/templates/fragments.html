@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title th:text="${title}"></title>
+<!--     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/> -->
+<!--     <link rel="stylesheet" th:href="@{/css/main.css}"/> -->
+</head>
+<body>
+<nav th:fragment="nav">
+	<div>
+		<ul>
+			<li><a>Home</a></li>
+			<li><a 
+			th:href="@{admin/addAbsence}" 
+			sec:authorize="hasAuthority('Admin')">addAbsence</a></li>
+			<li><a 
+			th:href="@{/admin/ListAbsence}"
+			sec:authorize="hasAuthority('Admin')">List Absence</a></li>
+			<li><a 
+			th:href="@{/etudiant/AbsenceEtudiant}"
+			sec:authorize="hasRole('ETUDIANT')">Mes Absences</a></li>
+		</ul>
+		<div th:if="${#httpServletRequest.remotRole} == ETUDIANT">
+            This content is only shown to ETUDIANT.
+        </div>
+	</div>
+</nav>
+
+</body>
+</html>
