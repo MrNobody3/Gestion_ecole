@@ -1,6 +1,6 @@
 package org.ensah.service.impl;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.ensah.domains.Compte;
 import org.ensah.repos.CompteRepos;

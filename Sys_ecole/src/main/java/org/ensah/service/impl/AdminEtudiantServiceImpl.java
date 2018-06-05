@@ -3,7 +3,7 @@ package org.ensah.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import org.ensah.domains.Etudiant;
 import org.ensah.repos.EtudiantRepos;

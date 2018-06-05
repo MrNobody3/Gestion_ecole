@@ -3,25 +3,26 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-	<h1>List Absence Etudiant<span th:text="${Etudiant.nom}+' '+${Etudiant.prenom}"></span></h1>
-	<div th:if="${Etudiant}">
+	<h1>List Absence Professeur<span th:text="${Professeur.nom}+' '+${Professeur.prenom}"></span></h1>
+	<div th:if="${Professeur}">
 	<table>
 			<tr>
 				<th>Date Absence</th>
 				<th>Heure Debut Seance</th>
 				<th>Heure Fin Seance</th>
 				<th>Element</th>
-				<th>Professeur</th>
+				<th>Etudiant</th>
 				<th>Justification</th>
 			</tr>
-			<tr th:each="Absence : ${Etudiant.lesAbsences}">
+			<tr th:each="Absence : ${Professeur.lesAbsences}">
 				<td th:text="${Absence.date_seance}"></td>
 				<td th:text="${Absence.heure_debut_seance}"></td>
 				<td th:text="${Absence.heure_fin_seance}"></td>
 				<td th:text="${Absence.element.nom}"></td>
-				<td th:text="${Absence.prof.nom}+' '+${Absence.prof.prenom}"></td>
+				<td th:text="${Absence.etudiant.nom}+' '+${Absence.etudiant.prenom}"></td>
 				<td th:if="${Absence.justification}">Justifié</td>
 				<td th:unless="${Absence.justification}">Non Justifié</td>
+				<td><a onclick="return confirm('Voulez vous vraiment Supprimer ?')" th:href="@{/professeur/delete(id=${Absence.id})}">Supprimer</a></td>
 			</tr>
 	</table>
 	</div>

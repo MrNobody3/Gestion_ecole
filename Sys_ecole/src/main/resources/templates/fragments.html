@@ -13,20 +13,51 @@
 <nav th:fragment="nav">
 	<div>
 		<ul>
-			<li><a>Home</a></li>
-			<li><a 
-			th:href="@{admin/addAbsence}" 
-			sec:authorize="hasAuthority('Admin')">addAbsence</a></li>
-			<li><a 
-			th:href="@{/admin/ListAbsence}"
-			sec:authorize="hasAuthority('Admin')">List Absence</a></li>
-			<li><a 
-			th:href="@{/etudiant/AbsenceEtudiant}"
-			sec:authorize="hasRole('ETUDIANT')">Mes Absences</a></li>
+			<li ><a th:href="@{/}">Home</a></li>
 		</ul>
-		<div th:if="${#httpServletRequest.remotRole} == ETUDIANT">
-            This content is only shown to ETUDIANT.
-        </div>
+		<div sec:authorize="isAuthenticated()">
+			
+			<ul sec:authorize="hasAuthority('ADMIN')">
+				<li>
+					<a th:href="@{/admin/addAbsence}" >addAbsence</a>
+				</li>
+				<li>
+					<a th:href="@{/admin/ListAbsence}" >List des Absences</a>
+				</li>
+			</ul>
+			<ul sec:authorize="hasAuthority('PROFESSEUR')">
+				<li>
+					<a th:href="@{/professeur/addAbsence}" >addAbsence</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/ProfesseurAbsenceList}">Les Absences</a>
+				</li>
+			</ul>
+			<ul sec:authorize="hasAuthority('ETUDIANT')">
+				<li>
+					<a th:href="@{/etudiant/AbsenceEtudiant}">Mes Absences</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+                	<a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Sign out</a>
+				</li>
+			</ul>
+		</div>
+		 <ul sec:authorize="!isAuthenticated()" class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/signin"><span class="glyphicon glyphicon-log-in"></span>Sign in</a>
+                </li>
+                <li>
+                    <a href="/#"><span class="glyphicon glyphicon-log-in"></span>Sign up</a>
+                </li>
+
+		</ul>
+		
 	</div>
 </nav>
 
