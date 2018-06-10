@@ -11,6 +11,6 @@
 		<li th:text="${compte.role.roleName}"></li>
 		<li th:text="${compte.enabled}"></li>
 	</ul>
-	<a th:href="@{/signin?signout}">sign out</a>
+<footer th:replace="fragments :: footer"></footer>
 </body>
 </html>
