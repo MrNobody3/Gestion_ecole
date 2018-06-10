@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: nav"></nav>
+<header th:replace="fragments :: header"></header>
 	<h1>List Absence</h1>
 	<form>
 		<div th:action="@{/admin/ListAbsence}" method="get" >
-			<label>Mot clé:</label>
+			<label>Saisie le Nom ou partie du Nom:</label>
 			<input type="text" name="motCle" th:value="${motCle}"/>
 			<button type="submit">Chercher</button>
 		</div>
@@ -14,19 +14,21 @@
 	<div th:if="${Absences}">
 		<table>
 			<tr>
-				<th>Date Absence</th>
 				<th>Heure Debut Seance</th>
 				<th>Heure Fin Seance</th>
 				<th>Etudiant</th>
+				<th>Photo Etudiant</th>
 				<th>Element</th>
 				<th>Professeur</th>
 				<th>Justification</th>
 			</tr>
 			<tr th:each="Absence : ${Absences}">
-				<td th:text="${Absence.date_seance}"></td>
 				<td th:text="${Absence.heure_debut_seance}"></td>
 				<td th:text="${Absence.heure_fin_seance}"></td>
 				<td th:text="${Absence.etudiant.nom}+' '+${Absence.etudiant.prenom}"></td>
+				<td>
+					<img th:src="@{/getPicture(nomPhoto=${Absence.etudiant.photo})}" width="150" height="150"/>
+				</td>
 				<td th:text="${Absence.element.nom}"></td>
 				<td th:text="${Absence.prof.nom}"></td>
 				<td th:if="${Absence.justification}">Justifié</td>

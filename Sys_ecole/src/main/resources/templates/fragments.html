@@ -10,7 +10,7 @@
 <!--     <link rel="stylesheet" th:href="@{/css/main.css}"/> -->
 </head>
 <body>
-<nav th:fragment="nav">
+<header th:fragment="header">
 	<div>
 		<ul>
 			<li ><a th:href="@{/}">Home</a></li>
@@ -19,30 +19,75 @@
 			
 			<ul sec:authorize="hasAuthority('ADMIN')">
 				<li>
-					<a th:href="@{/admin/addAbsence}" >addAbsence</a>
+					<a th:href="@{/professeur/addAbsence}" >Ajouter absence</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/addNote}" >Ajouter Note</a>
 				</li>
 				<li>
 					<a th:href="@{/admin/ListAbsence}" >List des Absences</a>
 				</li>
+				<li>
+					<a th:href="@{/admin/addEtudiant}">Ajouter Etudiant</a>
+				</li>
+				<li>
+					<a th:href="@{/admin/addProfesseur}">Ajouter Professeur</a>
+				</li>
+				<li>
+					<a th:href="@{/admin/affectation}">Ajouter Affectation</a>
+				</li>
+				<li>
+					<a th:href="@{/admin/listetudiant}">List Etudiant</a>
+				</li>
+				<li>
+					<a th:href="@{/admin/listProfesseur}">List Professeur</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/ProfesseurAbsenceList}">Mes Absences</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/ProfesseurNoteList}">Mes Notes</a>
+				</li>
+				
+				
 			</ul>
 			<ul sec:authorize="hasAuthority('PROFESSEUR')">
 				<li>
 					<a th:href="@{/professeur/addAbsence}" >addAbsence</a>
 				</li>
 				<li>
-					<a th:href="@{/professeur/ProfesseurAbsenceList}">Les Absences</a>
+					<a th:href="@{/professeur/ProfesseurAbsenceList}">Mes Absences</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/addNote}" >Ajouter Note</a>
+				</li>
+				<li>
+					<a th:href="@{/professeur/ProfesseurNoteList}">Mes Notes</a>
 				</li>
 			</ul>
 			<ul sec:authorize="hasAuthority('ETUDIANT')">
 				<li>
 					<a th:href="@{/etudiant/AbsenceEtudiant}">Mes Absences</a>
 				</li>
+				<li>
+					<a th:href="@{/etudiant/noteEtudiant}">Mes Notes</a>
+				</li>
+			</ul>
+			<button class="btn btn-link btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+                    <img th:src="@{/getPicture(nomPhoto=${user.photo})}" width="50" height="50"/>
+<!-- 					<span th:text="${nameUser}"></span> <span class="caret"></span> -->
+					<span th:text="${user.nom+' '+user.prenom}"></span>
+			</button>
+			<ul>
+				<li>Compte
+					<ul>
+						<li><a th:href="@{/mesInformations}">Mes Infromations</a></li>
+						<li><a th:href="@{/changePassword}">Changer mot de passe</a></li>
+						<li><a th:href="@{/changePicture}">Changer Picture</a></li>
+					</ul>
+				</li>
 			</ul>
 			<ul>
-				<li>
-                	<a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a>
-                </li>
-                <li class="divider"></li>
                 <li>
                     <a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Sign out</a>
 				</li>
@@ -59,7 +104,7 @@
 		</ul>
 		
 	</div>
-</nav>
+</header>
 
 </body>
 </html>

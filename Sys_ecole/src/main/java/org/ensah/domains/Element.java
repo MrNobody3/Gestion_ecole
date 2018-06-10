@@ -1,10 +1,14 @@
 package org.ensah.domains;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Element {
@@ -15,6 +19,15 @@ public class Element {
 	@ManyToOne
 	@JoinColumn(name="id_module")
 	private Module module;
+	@OneToMany(mappedBy="element",cascade=CascadeType.ALL)
+	private List<Note> lesNotes;
+	
+	public List<Note> getLesNotes() {
+		return lesNotes;
+	}
+	public void setLesNotes(List<Note> lesNotes) {
+		this.lesNotes = lesNotes;
+	}
 	public Long getId() {
 		return id;
 	}

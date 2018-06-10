@@ -2,24 +2,13 @@
 <html xmlns:th="http://www.thymleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-<nav th:replace="fragments :: nav"></nav>
+<header th:replace="fragments :: header"></header>
 <h1>Test Absence</h1>
-<!-- th:field="*{Etudiant}" -->
+
 	<form  method="post" th:object="${absence}">
-<!-- 		<label>Etudiant:</label> -->
-<!-- 		 <div th:each="Etudiant : ${Etudiants}"> -->
-<!--                             <label  th:inline="text"> -->
-<!--                                 <input type="checkbox" name="roles" th:value="${Etudiant.id}" /> -->
-<!--                                 [[${Etudiant.prenom}]] -->
-<!-- 		</label> -->
 		<div  th:if="${Erreuretd}">
                <span>Etudiant Introuvable</span>            
 			</div>
-		<div>
-			<label>Date Seance</label>
-			<input type="date" th:field="*{date_seance}"/>
-			<span th:errors="*{date_seance}"></span>
-		</div>
 		<div>
 			<label>Heure Debut Séance</label>
 			<input type="datetime" th:field="*{heure_debut_seance}" placeholder="Format yyyy-MM-dd HH:mm"/>
@@ -46,8 +35,8 @@
 		<div>
 			<label>Séléctionner Element</label>
 			<select name="idElement">
-				<option th:value="NULL" th:text="${Select}"></option>
-				<option th:each="Element : ${Elements}" th:value="${Element.id}" th:text="${Element.nom}">Wireframe</option>
+				<option th:value="NULL" th:text="${'Select Element'}"></option>
+				<option th:each="affectation : ${affectations}" th:value="${affectation.element.id}" th:text="${affectation.element.nom}">Wireframe</option>
 			</select>
 			<div  th:if="${erreurelement}">
                <span>Vous devez séléctionner un element</span>            
@@ -57,6 +46,5 @@
 		<button type="submit">Enregistrer</button>
 
 	</form>
-	<a th:href="@{/signin?signout}">sign out</a>
 </body>
 </html>

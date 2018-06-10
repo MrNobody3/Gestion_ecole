@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.validator.constraints.Email;
+
 @Entity
 public class Professeur {
 	@Id
@@ -16,11 +18,28 @@ public class Professeur {
 	private String nom;
 	private String prenom;
 	private String cin;
+	@Email
 	private String email;
+	private String photo;
 	@OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
 	private List<Absence> lesAbsences;
 	@OneToMany(mappedBy="professeur",cascade=CascadeType.ALL)
 	private List<Affectation> lesAffectations;
+	@OneToMany(mappedBy="professeur",cascade=CascadeType.ALL)
+	private List<Note> lesNotes;
+	
+	public List<Note> getLesNotes() {
+		return lesNotes;
+	}
+	public void setLesNotes(List<Note> lesNotes) {
+		this.lesNotes = lesNotes;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 	public Long getId() {
 		return id;
 	}

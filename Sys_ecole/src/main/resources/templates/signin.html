@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8"/>
-<title>Sign in</title>
-</head>
+<head th:replace="fragments :: head"></head>
 <body>
-<div th:if="${param.error}" th:text="${param.error}">Incorecte username or password</div>
+<header th:replace="fragments :: header"></header>
+<div th:if="${param.error}">Incorecte username or password</div>
  <div th:if="${param.signout}">You have been logged out</div>
 	<form action="/signin" method="post">
 		 <div >

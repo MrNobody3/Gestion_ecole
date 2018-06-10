@@ -1,6 +1,6 @@
 package org.ensah.domains;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -13,9 +13,6 @@ public class Absence {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	@NotNull
-	private Date date_seance;
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	@NotNull
 	private Date heure_debut_seance;
@@ -33,6 +30,19 @@ public class Absence {
 	@ManyToOne
 	@JoinColumn(name="id_prof")
 	private Professeur prof;
+	@Transient
+	private int nbHeure;
+	
+	public int getNbHeure() {
+		Date d1=getHeure_debut_seance();
+		Date d2=getHeure_fin_seance();
+     long ms = d2.getTime() - d1.getTime() ;
+     this.nbHeure=(int)((ms /1000 )/3600);
+		return nbHeure;
+	}
+	public void setNbHeure(int nbHeure) {
+		this.nbHeure = nbHeure;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -76,23 +86,6 @@ public class Absence {
 	public void setProf(Professeur prof) {
 		this.prof = prof;
 	}
-	public Date getDate_seance() {
-		return date_seance;
-	}
-	public void setDate_seance(Date date_seance) {
-		this.date_seance = date_seance;
-	}
-	public int calculenbheure(){
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
-		String day=stf.format(getDate_seance());
-		String hourFrom = stimef.format(getHeure_debut_seance());
-		String hourTo=stimef.format(getHeure_fin_seance());
-		 Date d1 = new Date(day+" "+hourFrom);
-	     Date d2 = new Date(day+" "+hourTo);
-	     long ms = d2.getTime() - d1.getTime() ;
-	     int nbHeures=(int)((ms /1000 )/3600);
-	     return nbHeures;
-	}
+	
 	
 }

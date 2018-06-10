@@ -7,4 +7,5 @@ public interface AdminEtudiantService {
 	public Etudiant getEtudiantbyCne(String cne);
 	public Etudiant getEtudiant(Long id);
 	public List<Etudiant> getEtudiantMotCle(String motCle);
+	void deleteetudiant(Long idetudiant);
 }

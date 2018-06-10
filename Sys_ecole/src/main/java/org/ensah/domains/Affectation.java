@@ -15,9 +15,9 @@ public class Affectation {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date_debut;
-	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date_fin;
 	@ManyToOne
 	@JoinColumn(name="id_prof")

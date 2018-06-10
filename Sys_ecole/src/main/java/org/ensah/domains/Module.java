@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Module {
 	@Id
@@ -21,6 +22,16 @@ public class Module {
 	@ManyToOne
 	@JoinColumn(name="id_Filiere")
 	private Filiere filier;
+	@ManyToOne 
+	@JoinColumn(name="id_niveau")
+	private Niveau niveau;
+	
+	public Niveau getNiveau() {
+		return niveau;
+	}
+	public void setNiveau(Niveau niveau) {
+		this.niveau = niveau;
+	}
 	public Long getId() {
 		return id;
 	}

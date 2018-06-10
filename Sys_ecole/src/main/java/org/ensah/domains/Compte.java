@@ -6,12 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.validator.constraints.Length;
+
 @Entity
 public class Compte {
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String username;
+	@Length(min = 3, max = 20, message = "Password between 3 and 20 char")
 	private String password;
 	private boolean enabled;
 	@ManyToOne

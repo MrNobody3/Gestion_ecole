@@ -1,6 +1,6 @@
 package org.ensah.config;
 
-import javax.sql.DataSource;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,13 +42,13 @@ public class Securityconfi extends WebSecurityConfigurerAdapter{
 //}
 	 @Override
 	    protected void configure(HttpSecurity httpSecurity) throws Exception {
-	       httpSecurity.formLogin().loginPage("/signin").defaultSuccessUrl("/home", true).permitAll()
+	       httpSecurity.formLogin().loginPage("/signin").defaultSuccessUrl("/", true).permitAll()
            .usernameParameter("username").passwordParameter("password")
            .and()
            .logout().logoutSuccessUrl("/signin?signout").permitAll();; 
 		 httpSecurity.authorizeRequests()
-	                .antMatchers("/professeur/*").hasAuthority("ADMIN")
-	                .antMatchers("/professeur/*").hasAuthority("PROFESSEUR")
+	                .antMatchers("/admin/*").hasAuthority("ADMIN")
+	                .antMatchers("/professeur/*").hasAnyAuthority("ADMIN","PROFESSEUR")
 	                .antMatchers("/etudiant/*").hasAuthority("ETUDIANT");
 	        //for H2 Database [Security hole | avoid in production]
 	        httpSecurity.csrf().disable();
